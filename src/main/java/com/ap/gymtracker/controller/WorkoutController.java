@@ -22,7 +22,17 @@ public class WorkoutController {
     }
 
     @GetMapping("/{id}")
-    public Workout getById(@PathVariable long id){
+    public Workout getById(@PathVariable Long id){
         return workoutService.getWorkoutById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        workoutService.deleteWorkoutById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Workout updateWorkout(@PathVariable Long id,@RequestBody Workout workout){
+        return workoutService.updateWorkout(id, workout);
     }
 }
