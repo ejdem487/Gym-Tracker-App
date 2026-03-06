@@ -1,9 +1,9 @@
 package com.ap.gymtracker.controller;
-import com.ap.gymtracker.model.Workout;
 import com.ap.gymtracker.service.WorkoutService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import com.ap.gymtracker.model.Workout;
 
 @RestController
 @RequestMapping("/api/workouts")
