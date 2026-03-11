@@ -1,15 +1,14 @@
 package com.ap.gymtracker.service;
-import com.ap.gymtracker.model.Workout;
 import com.ap.gymtracker.repository.WorkoutRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.jdbc.Work;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.management.RuntimeErrorException;
 import java.util.List;
+import com.ap.gymtracker.model.Workout;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Service
+@RequestMapping("/api/workouts")
 @RequiredArgsConstructor
 public class WorkoutService {
     private final WorkoutRepository workoutRepository;

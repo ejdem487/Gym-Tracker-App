@@ -1,9 +1,11 @@
 package com.ap.gymtracker.controller;
-import com.ap.gymtracker.model.Workout;
 import com.ap.gymtracker.service.WorkoutService;
+import jakarta.validation.constraints.*;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import com.ap.gymtracker.model.Workout;
 
 @RestController
 @RequestMapping("/api/workouts")
@@ -17,7 +19,7 @@ public class WorkoutController {
     }
 
     @PostMapping
-    public Workout createWorkout(@RequestBody Workout workout){
+    public Workout createWorkout(@Valid @RequestBody Workout workout){
         return workoutService.createWorkout(workout);
     }
 
@@ -32,7 +34,7 @@ public class WorkoutController {
     }
 
     @PutMapping("/{id}")
-    public Workout updateWorkout(@PathVariable Long id,@RequestBody Workout workout){
+    public Workout updateWorkout(@PathVariable Long id,@Valid @RequestBody Workout workout){
         return workoutService.updateWorkout(id, workout);
     }
 }

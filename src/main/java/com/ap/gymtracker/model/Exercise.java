@@ -1,14 +1,11 @@
 package com.ap.gymtracker.model;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,29 +13,21 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "workouts")
-public class Workout {
+@Table(name = "exercises")
+public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Name cannot be empty")
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String name;
 
-    @NotNull(message = "Date cannot be null")
-    @Column(nullable = false)
-    private LocalDate date;
-
     @Column
-    private String notes;
+    private String description;
 
-    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL,orphanRemoval = true)
-    @JsonManagedReference("workout-workoutExercise")
+    @OneToMany(mappedBy = "exercise",cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonManagedReference("exercise-workoutExercise")
     private List<WorkoutExercise> workoutExercises = new ArrayList<>();
-
-
-
-
 
 }
