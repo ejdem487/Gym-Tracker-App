@@ -2,6 +2,7 @@ package com.ap.gymtracker.controller;
 
 import com.ap.gymtracker.model.WorkoutExercise;
 import com.ap.gymtracker.service.WorkoutExerciseService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import com.ap.gymtracker.dto.WorkoutExerciseRequest;
@@ -25,7 +26,7 @@ public class WorkoutExerciseController {
     }
 
     @PostMapping
-    public WorkoutExercise addExerciseToWorkout(@RequestBody WorkoutExerciseRequest request){
+    public WorkoutExercise addExerciseToWorkout(@Valid @RequestBody WorkoutExerciseRequest request){
     return workoutExerciseService.addExerciceToWorkout(
             request.getWorkoutId(),
             request.getExerciseId(),
@@ -37,7 +38,7 @@ public class WorkoutExerciseController {
     }
 
     @PutMapping("/{id}")
-    public WorkoutExercise updateExerciseToWorkout(@PathVariable Long id, @RequestBody WorkoutExercise workoutExercise) {
+    public WorkoutExercise updateExerciseToWorkout(@PathVariable Long id,@Valid @RequestBody WorkoutExercise workoutExercise) {
         return workoutExerciseService.updateWorkoutExercise(id,workoutExercise);
     }
 

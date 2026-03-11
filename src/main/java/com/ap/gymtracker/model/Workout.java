@@ -2,6 +2,8 @@ package com.ap.gymtracker.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,9 +22,11 @@ public class Workout {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Name cannot be empty")
     @Column(nullable = false)
     private String name;
 
+    @NotNull(message = "Date cannot be null")
     @Column(nullable = false)
     private LocalDate date;
 

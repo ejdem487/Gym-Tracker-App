@@ -2,8 +2,11 @@ package com.ap.gymtracker.controller;
 
 import com.ap.gymtracker.model.Exercise;
 import com.ap.gymtracker.service.ExerciseService;
+import jakarta.validation.constraints.*;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -25,12 +28,12 @@ public class ExerciseController {
     }
 
     @PostMapping
-    public Exercise createExercise(@RequestBody Exercise exercise){
+    public Exercise createExercise(@Valid @RequestBody Exercise exercise){
         return exerciseService.createExercise(exercise);
     }
 
     @PutMapping("/{id}")
-    public Exercise updateExercise(@PathVariable Long id, @RequestBody Exercise exercise){
+    public Exercise updateExercise(@PathVariable Long id,@Valid @RequestBody Exercise exercise){
         return exerciseService.updateExercise(id, exercise);
     }
 

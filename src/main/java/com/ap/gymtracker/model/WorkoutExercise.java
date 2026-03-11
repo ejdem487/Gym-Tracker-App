@@ -1,6 +1,8 @@
 package com.ap.gymtracker.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,12 +19,16 @@ public class WorkoutExercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Sets cannot be null")
+    @Min(value = 1, message = "Sets must be at least 1")
     @Column
     private Integer sets;
 
+    @Min(value = 1, message = "Reps must be at least 1")
     @Column
     private Integer reps;
 
+    @Min(value = 0, message = "Weight cannot be negative")
     @Column
     private Integer weight;
 
