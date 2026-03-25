@@ -8,7 +8,6 @@ import com.ap.gymtracker.model.Workout;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Service
-@RequestMapping("/api/workouts")
 @RequiredArgsConstructor
 public class WorkoutService {
     private final WorkoutRepository workoutRepository;
