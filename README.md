@@ -13,6 +13,7 @@ The current scope is a backend API. The application can be explored through Swag
 - CRUD operations for workouts and exercises
 - Add exercises to workouts
 - Track sets, reps, and weight for each workout exercise
+- JWT-based authentication with register and login endpoints
 - Request validation and basic error handling
 - Swagger UI API documentation
 
@@ -32,13 +33,41 @@ The current scope is a backend API. The application can be explored through Swag
 - Java 21
 - Docker
 
-### Start the database
+### Environment variables
+
+Create a `.env` file in the project root. You can copy the example:
 
 ```bash
-docker compose up -d
+cp .env.example .env
 ```
 
-### Run the application
+Required variables:
+
+```env
+JWT_SECRET=your_secret_key_here
+JWT_EXPIRATION=787890000
+```
+
+### Run with Docker Compose
+
+```bash
+docker compose up --build
+```
+
+This starts:
+
+- `postgres` on `localhost:5432`
+- the Spring Boot API on `localhost:8080`
+
+### Run only the database with Docker
+
+If you want to run the API from your IDE or with Maven, start just PostgreSQL:
+
+```bash
+docker compose up -d postgres
+```
+
+### Run the application locally
 
 Run `GymTrackerApplication.java` from your IDE or use Maven:
 
@@ -60,6 +89,8 @@ You can also test the endpoints with Postman.
 
 ## Example Endpoints
 
+- `POST /api/auth/register`
+- `POST /api/auth/login`
 - `GET /api/workouts`
 - `POST /api/workouts`
 - `GET /api/exercises`
@@ -78,7 +109,6 @@ You can also test the endpoints with Postman.
 
 ## Roadmap
 
-- Add authentication
 - Add filtering and workout statistics
 - Add frontend client in Vue.js
 - Improve automated tests

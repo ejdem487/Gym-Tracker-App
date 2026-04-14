@@ -8,3 +8,22 @@ services:
       POSTGRES_DB: gymtrackerdb
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: gym-tracker-app
+    depends_on:
+      - postgres
+    environment:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/gymtrackerdb
+        SPRING_DATASOURCE_USERNAME: admin
+        SPRING_DATASOURCE_PASSWORD: admin
+        JWT_SECRET: ${JWT_SECRET}
+        JWT_EXPIRATION: ${JWT_EXPIRATION}
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:
