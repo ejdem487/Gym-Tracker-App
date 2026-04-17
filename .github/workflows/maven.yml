@@ -26,6 +26,8 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
+        
+
     steps:
     - uses: actions/checkout@v4
 
@@ -37,7 +39,14 @@ jobs:
         cache: maven
 
     - name: Build with Maven
-      run: mvn -B package -DskipTests --file pom.xml
+      run: mvn -B package --file pom.xml
+      env:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/gymtrackerdb
+        SPRING_DATASOURCE_USERNAME: admin
+        SPRING_DATASOURCE_PASSWORD: admin
+        # Musíme dodat i JWT proměnné, aby Spring mohl nastartovat kontext
+        JWT_SECRET: "superrandomtoken"
+        JWT_EXPIRATION: 3600000
 
 
     - name: Upload Build Artifact
