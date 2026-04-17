@@ -44,7 +44,7 @@ jobs:
         SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/gymtrackerdb
         SPRING_DATASOURCE_USERNAME: admin
         SPRING_DATASOURCE_PASSWORD: admin
-        # Musíme dodat i JWT proměnné, aby Spring mohl nastartovat kontext
+        # Just for test runs
         JWT_SECRET: "superrandomtoken"
         JWT_EXPIRATION: 3600000
 
