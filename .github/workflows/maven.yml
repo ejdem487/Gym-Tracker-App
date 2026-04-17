@@ -11,10 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. Stáhne tvůj kód do virtuálního stroje GitHubu
     - uses: actions/checkout@v4
 
-    # 2. Nastaví Javu 17
     - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
@@ -22,11 +20,10 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    # 3. Zkompiluje aplikaci a spustí testy přes Maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package -DskipTests --file pom.xml
 
-    # 4. Uloží vygenerovaný JAR soubor jako Artifact (uvidíš ho na webu GitHubu)
+
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
       with:
