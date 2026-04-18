@@ -39,6 +39,6 @@ public class ExerciseController {
 
     @DeleteMapping("/{id}")
     public void deleteExercise(@PathVariable Long id){
-        exerciseService.deleteExercideById(id);
+        exerciseService.deleteExerciseById(id);
     }
 }

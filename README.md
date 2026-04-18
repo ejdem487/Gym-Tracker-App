@@ -30,7 +30,7 @@ The current scope is a backend API. The application can be explored through Swag
 
 ### Prerequisites
 
-- Java 21
+- Java 17
 - Docker
 
 ### Environment variables

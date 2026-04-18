@@ -27,7 +27,7 @@ public class WorkoutExerciseController {
 
     @PostMapping
     public WorkoutExercise addExerciseToWorkout(@Valid @RequestBody WorkoutExerciseRequest request){
-    return workoutExerciseService.addExerciceToWorkout(
+    return workoutExerciseService.addExerciseToWorkout(
             request.getWorkoutId(),
             request.getExerciseId(),
             request.getSets(),

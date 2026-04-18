@@ -21,7 +21,7 @@ public class WorkoutExerciseService{
         return workoutExerciseRepository.findByWorkoutId(workoutId);
     }
 
-    public WorkoutExercise addExerciceToWorkout(Long workoutId, Long exerciseId, Integer sets, Integer reps, Integer weight){
+    public WorkoutExercise addExerciseToWorkout(Long workoutId, Long exerciseId, Integer sets, Integer reps, Integer weight){
         Workout workout = workoutRepository.findById(workoutId)
                 .orElseThrow(() -> new RuntimeException("Workout not find"));
         Exercise exercise = exerciseRepository.findById(exerciseId)
