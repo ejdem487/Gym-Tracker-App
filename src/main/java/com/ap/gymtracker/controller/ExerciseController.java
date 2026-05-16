@@ -2,7 +2,6 @@ package com.ap.gymtracker.controller;
 
 import com.ap.gymtracker.model.Exercise;
 import com.ap.gymtracker.service.ExerciseService;
-import jakarta.validation.constraints.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +38,6 @@ public class ExerciseController {
 
     @DeleteMapping("/{id}")
     public void deleteExercise(@PathVariable Long id){
-        exerciseService.deleteExercideById(id);
+        exerciseService.deleteExerciseById(id);
     }
 }
