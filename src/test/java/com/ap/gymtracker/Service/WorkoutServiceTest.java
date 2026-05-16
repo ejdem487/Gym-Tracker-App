@@ -1,5 +1,6 @@
 package com.ap.gymtracker.service;
 
+import com.ap.gymtracker.model.User;
 import com.ap.gymtracker.model.Workout;
 import com.ap.gymtracker.repository.WorkoutRepository;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,7 @@ class WorkoutServiceTest {
         when(workoutRepository.findById(1L)).thenReturn(Optional.of(existingWorkout));
         when(workoutRepository.save(existingWorkout)).thenReturn(existingWorkout);
 
-        Workout result = workoutService.updateWorkout(1L, updatedWorkout);
+        Workout result = workoutService.updateWorkout(1L, updatedWorkout, new User());
 
         assertEquals("Leg Day", result.getName());
         assertEquals(LocalDate.of(2026, 3, 30), result.getDate());
