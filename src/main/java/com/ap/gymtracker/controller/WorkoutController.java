@@ -1,4 +1,5 @@
 package com.ap.gymtracker.controller;
+import com.ap.gymtracker.model.User;
 import com.ap.gymtracker.service.WorkoutService;
 import jakarta.validation.constraints.*;
 import jakarta.validation.Valid;
@@ -19,22 +20,22 @@ public class WorkoutController {
     }
 
     @PostMapping
-    public Workout createWorkout(@Valid @RequestBody Workout workout){
-        return workoutService.createWorkout(workout);
+    public Workout createWorkout(@Valid @RequestBody Workout workout, User user){
+        return workoutService.createWorkout(workout, user);
     }
 
     @GetMapping("/{id}")
-    public Workout getById(@PathVariable Long id){
-        return workoutService.getWorkoutById(id);
+    public Workout getById(@PathVariable Long id, User user){
+        return workoutService.getWorkoutById(id, user);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
-        workoutService.deleteWorkoutById(id);
+    public void delete(@PathVariable Long id, User user){
+        workoutService.deleteWorkoutById(id,  user);
     }
 
     @PutMapping("/{id}")
-    public Workout updateWorkout(@PathVariable Long id,@Valid @RequestBody Workout workout){
-        return workoutService.updateWorkout(id, workout);
+    public Workout updateWorkout(@PathVariable Long id,@Valid @RequestBody Workout workout, User user){
+        return workoutService.updateWorkout(id, workout, user);
     }
 }

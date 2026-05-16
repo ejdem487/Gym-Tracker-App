@@ -1,5 +1,6 @@
 package com.ap.gymtracker.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -37,6 +38,10 @@ public class Workout {
     @JsonManagedReference("workout-workoutExercise")
     private List<WorkoutExercise> workoutExercises = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference("user-workoutUser")
+    private User user;
 
 
 
