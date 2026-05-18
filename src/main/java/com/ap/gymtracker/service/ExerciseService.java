@@ -3,6 +3,7 @@ package com.ap.gymtracker.service;
 import com.ap.gymtracker.model.Exercise;
 import com.ap.gymtracker.repository.ExerciseRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import java.util.List;
 

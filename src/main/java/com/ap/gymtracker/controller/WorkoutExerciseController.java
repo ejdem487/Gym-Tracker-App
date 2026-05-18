@@ -1,9 +1,12 @@
 package com.ap.gymtracker.controller;
 
+import com.ap.gymtracker.model.User;
 import com.ap.gymtracker.model.WorkoutExercise;
+import com.ap.gymtracker.service.AuthService;
 import com.ap.gymtracker.service.WorkoutExerciseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import com.ap.gymtracker.dto.WorkoutExerciseRequest;
 
@@ -16,19 +19,20 @@ public class WorkoutExerciseController {
     private final WorkoutExerciseService workoutExerciseService;
 
     @GetMapping("/workout/{workoutId}")
-    public List<WorkoutExercise> getByWorkoutId(@PathVariable Long workoutId) {
-        return workoutExerciseService.findByWorkoutId(workoutId);
+    public List<WorkoutExercise> getByWorkoutId(@PathVariable Long workoutId, @AuthenticationPrincipal User user) {
+        return workoutExerciseService.findByWorkoutId(workoutId, user);
     }
 
     @GetMapping("/{id}")
-    public WorkoutExercise getById(@PathVariable Long id) {
-        return workoutExerciseService.getWorkoutExerciseById(id);
+    public WorkoutExercise getById(@PathVariable Long id, @AuthenticationPrincipal User user) {
+        return workoutExerciseService.getWorkoutExerciseById(id,  user);
     }
 
-    @PostMapping
-    public WorkoutExercise addExerciseToWorkout(@Valid @RequestBody WorkoutExerciseRequest request){
-    return workoutExerciseService.addExerciceToWorkout(
+    @PostMapping 
+    public WorkoutExercise addExerciseToWorkout(@Valid @RequestBody WorkoutExerciseRequest request,  @AuthenticationPrincipal User user) {
+    return workoutExerciseService.addExerciseToWorkout(
             request.getWorkoutId(),
+            user,
             request.getExerciseId(),
             request.getSets(),
             request.getReps(),
@@ -38,12 +42,12 @@ public class WorkoutExerciseController {
     }
 
     @PutMapping("/{id}")
-    public WorkoutExercise updateExerciseToWorkout(@PathVariable Long id,@Valid @RequestBody WorkoutExercise workoutExercise) {
-        return workoutExerciseService.updateWorkoutExercise(id,workoutExercise);
+    public WorkoutExercise updateExerciseToWorkout(@PathVariable Long id,@AuthenticationPrincipal User user,@Valid @RequestBody WorkoutExercise workoutExercise) {
+        return workoutExerciseService.updateWorkoutExercise(id,user,workoutExercise);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        workoutExerciseService.removeExerciseFromWorkout(id);
+    public void delete(@PathVariable Long id, @AuthenticationPrincipal User user) {
+        workoutExerciseService.removeExerciseFromWorkout(id,  user);
     }
 }
