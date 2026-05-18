@@ -1,9 +1,11 @@
 package com.ap.gymtracker.controller;
 
+import com.ap.gymtracker.model.User;
 import com.ap.gymtracker.model.WorkoutExercise;
 import com.ap.gymtracker.service.WorkoutExerciseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import com.ap.gymtracker.dto.WorkoutExerciseRequest;
 
@@ -16,8 +18,8 @@ public class WorkoutExerciseController {
     private final WorkoutExerciseService workoutExerciseService;
 
     @GetMapping("/workout/{workoutId}")
-    public List<WorkoutExercise> getByWorkoutId(@PathVariable Long workoutId) {
-        return workoutExerciseService.findByWorkoutId(workoutId);
+    public List<WorkoutExercise> getByWorkoutId(@PathVariable Long workoutId, @AuthenticationPrincipal User user) {
+        return workoutExerciseService.findByWorkoutId(workoutId, user);
     }
 
     @GetMapping("/{id}")
@@ -25,7 +27,7 @@ public class WorkoutExerciseController {
         return workoutExerciseService.getWorkoutExerciseById(id);
     }
 
-    @PostMapping
+    @PostMapping 
     public WorkoutExercise addExerciseToWorkout(@Valid @RequestBody WorkoutExerciseRequest request){
     return workoutExerciseService.addExerciseToWorkout(
             request.getWorkoutId(),

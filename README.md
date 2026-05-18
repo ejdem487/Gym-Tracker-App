@@ -14,6 +14,7 @@ The current scope is a backend API. The application can be explored through Swag
 - Add exercises to workouts
 - Track sets, reps, and weight for each workout exercise
 - JWT-based authentication with register and login endpoints
+- User-specific workout access for authenticated users
 - Request validation and basic error handling
 - Swagger UI API documentation
 
@@ -30,7 +31,7 @@ The current scope is a backend API. The application can be explored through Swag
 
 ### Prerequisites
 
-- Java 17
+- Java 21
 - Docker
 
 ### Environment variables
@@ -93,10 +94,21 @@ You can also test the endpoints with Postman.
 - `POST /api/auth/login`
 - `GET /api/workouts`
 - `POST /api/workouts`
+- `GET /api/workouts/{id}`
+- `PUT /api/workouts/{id}`
+- `DELETE /api/workouts/{id}`
 - `GET /api/exercises`
 - `POST /api/exercises`
+- `GET /api/exercises/{id}`
+- `PUT /api/exercises/{id}`
+- `DELETE /api/exercises/{id}`
 - `GET /api/workout-exercises/workout/{workoutId}`
 - `POST /api/workout-exercises`
+- `GET /api/workout-exercises/{id}`
+- `PUT /api/workout-exercises/{id}`
+- `DELETE /api/workout-exercises/{id}`
+
+All endpoints except `/api/auth/**`, Swagger UI, and OpenAPI docs require a valid JWT bearer token.
 
 ## Project Structure
 

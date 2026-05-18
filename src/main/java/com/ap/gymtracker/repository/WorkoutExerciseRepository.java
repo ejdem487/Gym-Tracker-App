@@ -1,11 +1,11 @@
 package com.ap.gymtracker.repository;
 
-import com.ap.gymtracker.model.Workout;
+import com.ap.gymtracker.model.User;
 import com.ap.gymtracker.model.WorkoutExercise;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface WorkoutExerciseRepository extends JpaRepository<WorkoutExercise,Long> {
-    List<WorkoutExercise> findByWorkoutId(Long workoutId);
+    List<WorkoutExercise> findByWorkout_IdAndWorkout_User(Long workoutId, User user);
 
 }

@@ -1,6 +1,7 @@
 package com.ap.gymtracker.service;
 
 import com.ap.gymtracker.model.Exercise;
+import com.ap.gymtracker.model.User;
 import com.ap.gymtracker.model.Workout;
 import com.ap.gymtracker.model.WorkoutExercise;
 import com.ap.gymtracker.repository.ExerciseRepository;
@@ -17,8 +18,8 @@ public class WorkoutExerciseService{
     private final WorkoutRepository workoutRepository;
     private final ExerciseRepository exerciseRepository;
 
-    public List<WorkoutExercise> findByWorkoutId(Long workoutId) {
-        return workoutExerciseRepository.findByWorkoutId(workoutId);
+    public List<WorkoutExercise> findByWorkoutId(Long workoutId, User user) {
+        return workoutExerciseRepository.findByWorkout_IdAndWorkout_User(workoutId, user);
     }
 
     public WorkoutExercise addExerciseToWorkout(Long workoutId, Long exerciseId, Integer sets, Integer reps, Integer weight){
