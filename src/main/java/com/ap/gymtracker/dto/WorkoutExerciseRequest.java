@@ -1,5 +1,6 @@
 package com.ap.gymtracker.dto;
 
+import com.ap.gymtracker.model.User;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

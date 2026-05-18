@@ -5,6 +5,7 @@ import com.ap.gymtracker.service.ExerciseService;
 import jakarta.validation.constraints.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -27,16 +28,18 @@ public class ExerciseController {
         return exerciseService.getExerciseById(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public Exercise createExercise(@Valid @RequestBody Exercise exercise){
         return exerciseService.createExercise(exercise);
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public Exercise updateExercise(@PathVariable Long id,@Valid @RequestBody Exercise exercise){
         return exerciseService.updateExercise(id, exercise);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public void deleteExercise(@PathVariable Long id){
         exerciseService.deleteExerciseById(id);

@@ -22,8 +22,8 @@ public class WorkoutExerciseService{
         return workoutExerciseRepository.findByWorkout_IdAndWorkout_User(workoutId, user);
     }
 
-    public WorkoutExercise addExerciseToWorkout(Long workoutId, Long exerciseId, Integer sets, Integer reps, Integer weight){
-        Workout workout = workoutRepository.findById(workoutId)
+    public WorkoutExercise addExerciseToWorkout(Long workoutId,User user, Long exerciseId, Integer sets, Integer reps, Integer weight){
+        Workout workout = workoutRepository.findByIdAndUser(workoutId,user)
                 .orElseThrow(() -> new RuntimeException("Workout not find"));
         Exercise exercise = exerciseRepository.findById(exerciseId)
                 .orElseThrow(() -> new RuntimeException("Exercise not find"));
@@ -37,17 +37,17 @@ public class WorkoutExerciseService{
         return workoutExerciseRepository.save(we);
     }
 
-    public void removeExerciseFromWorkout(Long id){
+    public void removeExerciseFromWorkout(Long id, User user) {
+        workoutExerciseRepository.findByIdAndWorkout_User(id, user).orElseThrow(() -> new RuntimeException("Workout not find"));
         workoutExerciseRepository.deleteById(id);
     }
 
-    public WorkoutExercise getWorkoutExerciseById(Long id){
-        return workoutExerciseRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Workout not found"));
+    public WorkoutExercise getWorkoutExerciseById(Long id, User user){
+        return workoutExerciseRepository.findByIdAndWorkout_User(id, user).orElseThrow(() -> new RuntimeException("Workout not find"));
     }
 
-    public WorkoutExercise updateWorkoutExercise(Long id, WorkoutExercise updated) {
-        WorkoutExercise existing =  getWorkoutExerciseById(id);
+    public WorkoutExercise updateWorkoutExercise(Long id,User user, WorkoutExercise updated) {
+        WorkoutExercise existing =  getWorkoutExerciseById(id, user);
         existing.setExercise(updated.getExercise());
         existing.setSets(updated.getSets());
         existing.setReps(updated.getReps());
