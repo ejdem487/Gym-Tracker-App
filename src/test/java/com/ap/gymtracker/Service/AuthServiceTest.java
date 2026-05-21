@@ -39,16 +39,14 @@ public class AuthServiceTest {
     @Test
 
     void registerShouldReturnToken() {
-        AuthRequest request = new AuthRequest();
-        request.setUsername("admin");
-        request.setPassword("5678");
+        AuthRequest request = new AuthRequest("admin", "5678");
 
-        when(userRepository.findByUsername(request.getUsername())).thenReturn(Optional.empty());
-        when(passwordEncoder.encode(request.getPassword())).thenReturn("encoded5678");
+        when(userRepository.findByUsername(request.username())).thenReturn(Optional.empty());
+        when(passwordEncoder.encode(request.password())).thenReturn("encoded5678");
         when(jwtService.generateToken("admin")).thenReturn("token456");
 
         AuthResponse response = authService.register(request);
 
-        assertEquals("token456", response.getToken());
+        assertEquals("token456", response.token());
     }
 }
