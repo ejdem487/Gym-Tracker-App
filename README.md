@@ -42,11 +42,24 @@ Create a `.env` file in the project root. You can copy the example:
 cp .env.example .env
 ```
 
-Required variables:
+Required variables for Docker Compose:
 
 ```env
+DB_USERNAME=admin
+DB_PASSWORD=admin
+DB_NAME=gymtrackerdb
 JWT_SECRET=your_secret_key_here
 JWT_EXPIRATION=787890000
+```
+
+If you run the Spring Boot app locally outside Docker, only `JWT_SECRET` and
+`JWT_EXPIRATION` are required. Database connection settings fall back to these
+defaults from `application.yaml`:
+
+```env
+SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/gymtrackerdb
+SPRING_DATASOURCE_USERNAME=admin
+SPRING_DATASOURCE_PASSWORD=admin
 ```
 
 ### Run with Docker Compose
