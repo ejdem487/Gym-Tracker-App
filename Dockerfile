@@ -13,7 +13,13 @@ RUN ./mvnw clean package -DskipTests
 FROM eclipse-temurin:21-jre
 WORKDIR /app
 
+RUN useradd -m -s /bin/bash gymuser
+
 COPY --from=build /app/target/*.jar app.jar
+
+RUN chown -R gymuser:gymuser /app
+
+USER gymuser
 
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
