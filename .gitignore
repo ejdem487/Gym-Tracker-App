@@ -17,3 +17,7 @@ buildNumber.properties
 .classpath
 .env
 .codex
+
+# IntelliJ
+.idea/
+*.iml
