@@ -22,13 +22,13 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public AuthResponse register(AuthRequest request){
-        if (userRepository.findByUsername(request.getUsername()).isPresent()) {
+        if (userRepository.findByUsername(request.username()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Username already exists");
         }
 
         User user = new User();
-        user.setUsername(request.getUsername());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setUsername(request.username());
+        user.setPassword(passwordEncoder.encode(request.password()));
         userRepository.save(user);
         String token = jwtService.generateToken(user.getUsername());
         return new AuthResponse(token);
@@ -36,10 +36,10 @@ public class AuthService {
 
     public AuthResponse login(AuthRequest request){
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(),request.getPassword())
+                new UsernamePasswordAuthenticationToken(request.username(),request.password())
         );
 
-        User user = userRepository.findByUsername(request.getUsername())
+        User user = userRepository.findByUsername(request.username())
                 .orElseThrow(() ->new RuntimeException("USer not found"));
         String token = jwtService.generateToken(user.getUsername());
         return new AuthResponse(token);

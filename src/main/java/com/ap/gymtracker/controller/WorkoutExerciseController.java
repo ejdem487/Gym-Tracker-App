@@ -2,7 +2,6 @@ package com.ap.gymtracker.controller;
 
 import com.ap.gymtracker.model.User;
 import com.ap.gymtracker.model.WorkoutExercise;
-import com.ap.gymtracker.service.AuthService;
 import com.ap.gymtracker.service.WorkoutExerciseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,12 +30,12 @@ public class WorkoutExerciseController {
     @PostMapping 
     public WorkoutExercise addExerciseToWorkout(@Valid @RequestBody WorkoutExerciseRequest request,  @AuthenticationPrincipal User user) {
     return workoutExerciseService.addExerciseToWorkout(
-            request.getWorkoutId(),
+            request.workoutId(),
             user,
-            request.getExerciseId(),
-            request.getSets(),
-            request.getReps(),
-            request.getWeight()
+            request.exerciseId(),
+            request.sets(),
+            request.reps(),
+            request.weight()
 
     );
     }

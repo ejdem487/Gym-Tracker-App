@@ -3,6 +3,7 @@ package com.ap.gymtracker.controller;
 import com.ap.gymtracker.dto.AuthRequest;
 import com.ap.gymtracker.dto.AuthResponse;
 import com.ap.gymtracker.service.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,12 +18,12 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public AuthResponse register(@RequestBody AuthRequest request) {
+    public AuthResponse register(@Valid  @RequestBody AuthRequest request) {
         return authService.register(request);
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody AuthRequest request) {
+    public AuthResponse login(@Valid  @RequestBody AuthRequest request) {
         return authService.login(request);
     }
 }
