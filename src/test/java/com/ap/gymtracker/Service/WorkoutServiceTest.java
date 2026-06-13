@@ -26,6 +26,8 @@ class WorkoutServiceTest {
 
     @Test
     void updateWorkoutShouldChangeWorkoutFields() {
+        User testUser1 = new User();
+
         Workout existingWorkout = new Workout();
         existingWorkout.setId(1L);
         existingWorkout.setName("Push Day");
@@ -37,10 +39,10 @@ class WorkoutServiceTest {
         updatedWorkout.setDate(LocalDate.of(2026, 3, 30));
         updatedWorkout.setNotes("New notes");
 
-        when(workoutRepository.findById(1L)).thenReturn(Optional.of(existingWorkout));
+        when(workoutRepository.findByIdAndUser(1L,testUser1)).thenReturn(Optional.of(existingWorkout));
         when(workoutRepository.save(existingWorkout)).thenReturn(existingWorkout);
 
-        Workout result = workoutService.updateWorkout(1L, updatedWorkout, new User());
+        Workout result = workoutService.updateWorkout(1L, updatedWorkout, testUser1);
 
         assertEquals("Leg Day", result.getName());
         assertEquals(LocalDate.of(2026, 3, 30), result.getDate());

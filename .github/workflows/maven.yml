@@ -31,10 +31,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up JDK 17
+    - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
-        java-version: '17'
+        java-version: '21'
         distribution: 'temurin'
         cache: maven
 
@@ -45,7 +45,7 @@ jobs:
         SPRING_DATASOURCE_USERNAME: admin
         SPRING_DATASOURCE_PASSWORD: admin
         # Just for test runs
-        JWT_SECRET: "superrandomtoken"
+        JWT_SECRET: "8f3a1c9e72b4d6a0c5e8173f94a2b6d8e1f3057c6a8b0d2ef4971c35b8d0e26a"
         JWT_EXPIRATION: 3600000
 
 

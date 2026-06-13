@@ -1,5 +1,7 @@
 package com.ap.gymtracker.controller;
 
+import com.ap.gymtracker.dto.ExerciseRequest;
+import com.ap.gymtracker.dto.ExerciseResponse;
 import com.ap.gymtracker.model.Exercise;
 import com.ap.gymtracker.service.ExerciseService;
 import jakarta.validation.constraints.*;
@@ -19,24 +21,24 @@ public class ExerciseController {
     private final ExerciseService exerciseService;
 
     @GetMapping
-    public List<Exercise> getAllExercises(){
+    public List<ExerciseResponse> getAllExercises(){
         return exerciseService.getAllExercises();
     }
 
     @GetMapping("/{id}")
-    public Exercise getExerciseById(@PathVariable Long id){
-        return exerciseService.getExerciseById(id);
+    public ExerciseResponse getExerciseById(@PathVariable Long id){
+        return exerciseService.getExerciseInfo(id);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public Exercise createExercise(@Valid @RequestBody Exercise exercise){
-        return exerciseService.createExercise(exercise);
+    public ExerciseResponse createExercise(@Valid @RequestBody ExerciseRequest exerciseRequest){
+        return exerciseService.createExercise(exerciseRequest);
     }
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public Exercise updateExercise(@PathVariable Long id,@Valid @RequestBody Exercise exercise){
-        return exerciseService.updateExercise(id, exercise);
+    public ExerciseResponse updateExercise(@PathVariable Long id,@Valid @RequestBody ExerciseRequest exerciseRequest){
+        return exerciseService.updateExercise(id, exerciseRequest);
     }
 
     @PreAuthorize("hasRole('ADMIN')")

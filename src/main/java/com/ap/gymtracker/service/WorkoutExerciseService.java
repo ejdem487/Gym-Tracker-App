@@ -1,5 +1,6 @@
 package com.ap.gymtracker.service;
 
+import com.ap.gymtracker.exception.ResourceNotFoundException;
 import com.ap.gymtracker.model.Exercise;
 import com.ap.gymtracker.model.User;
 import com.ap.gymtracker.model.Workout;
@@ -24,9 +25,9 @@ public class WorkoutExerciseService{
 
     public WorkoutExercise addExerciseToWorkout(Long workoutId,User user, Long exerciseId, Integer sets, Integer reps, Integer weight){
         Workout workout = workoutRepository.findByIdAndUser(workoutId,user)
-                .orElseThrow(() -> new RuntimeException("Workout not find"));
+                .orElseThrow(() -> new ResourceNotFoundException("Workout not found"));
         Exercise exercise = exerciseRepository.findById(exerciseId)
-                .orElseThrow(() -> new RuntimeException("Exercise not find"));
+                .orElseThrow(() -> new ResourceNotFoundException("Exercise not found"));
 
         WorkoutExercise we = new WorkoutExercise();
         we.setWorkout(workout);
@@ -38,12 +39,12 @@ public class WorkoutExerciseService{
     }
 
     public void removeExerciseFromWorkout(Long id, User user) {
-        workoutExerciseRepository.findByIdAndWorkout_User(id, user).orElseThrow(() -> new RuntimeException("Workout not find"));
+        workoutExerciseRepository.findByIdAndWorkout_User(id, user).orElseThrow(() -> new ResourceNotFoundException("Workout exercise not found"));
         workoutExerciseRepository.deleteById(id);
     }
 
     public WorkoutExercise getWorkoutExerciseById(Long id, User user){
-        return workoutExerciseRepository.findByIdAndWorkout_User(id, user).orElseThrow(() -> new RuntimeException("Workout not find"));
+        return workoutExerciseRepository.findByIdAndWorkout_User(id, user).orElseThrow(() -> new ResourceNotFoundException("Workout Exercise not found"));
     }
 
     public WorkoutExercise updateWorkoutExercise(Long id,User user, WorkoutExercise updated) {

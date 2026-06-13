@@ -13,11 +13,18 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Map<String,String>> handleResourceNotFoundException(ResourceNotFoundException ex){
+        Map<String,String> map = new HashMap<>();
+        map.put("message",ex.getMessage());
+        return new ResponseEntity<>(map,HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String,String>> handleRunTimeException (RuntimeException ex){
         Map<String,String> error = new HashMap<>();
-        error.put("message", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        error.put("message", "Internal Server Error");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -33,4 +40,7 @@ public class GlobalExceptionHandler {
         error.put("message", ex.getReason());
         return ResponseEntity.status(ex.getStatusCode()).body(error);
     }
+
+
+
 }

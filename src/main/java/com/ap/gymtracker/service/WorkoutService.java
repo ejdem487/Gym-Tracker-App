@@ -1,4 +1,5 @@
 package com.ap.gymtracker.service;
+import com.ap.gymtracker.exception.ResourceNotFoundException;
 import com.ap.gymtracker.model.User;
 import com.ap.gymtracker.repository.WorkoutRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class WorkoutService {
 
     public Workout getWorkoutById(Long id, User user){
         return workoutRepository.findByIdAndUser(id,user)
-                .orElseThrow(() -> new RuntimeException("Workout not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Workout not found"));
     }
 
     public void deleteWorkoutById(Long id, User user){
