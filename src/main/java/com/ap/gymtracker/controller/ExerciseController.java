@@ -4,7 +4,6 @@ import com.ap.gymtracker.dto.ExerciseRequest;
 import com.ap.gymtracker.dto.ExerciseResponse;
 import com.ap.gymtracker.model.Exercise;
 import com.ap.gymtracker.service.ExerciseService;
-import jakarta.validation.constraints.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
